@@ -69,10 +69,8 @@ import WidgetsTables from "../pages/widgets-tables";
 import WidgetsCharts from "../pages/widgets-charts";
 import WidgetsStatistics from "../pages/widgets-statistics";
 import WidgetsMiscellaneous from "../pages/widgets-miscellaneous";
-import UsersList from "../pages/users-list";
-import AddRole from "../pages/role-management/AddRole";
 import ProtectedRoute from "./ProtectedRoute";
-import StaffList from "../pages/staff/StaffList";
+
 
 export const router = createBrowserRouter([
     
