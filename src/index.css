@@ -1,0 +1,32 @@
+.danger {
+    color: red;
+    font-weight: bold;
+}
+
+/* Add this CSS to your global styles or a separate CSS file */
+
+.custom-control-input {
+    /* Ensure checkbox is visible */
+    display: block;
+    position: absolute;
+    opacity: 0;
+  }
+  
+  .custom-control-label {
+    padding-left: 0.;
+    padding-right: 50px;
+    cursor: pointer;
+}
+  
+  .custom-control-input:checked ~ .custom-control-label::before {
+    /* Style the checkmark when checked */
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1em;
+    height: 1em;
+    border: 0.25em solid #007bff; /* Bootstrap blue */
+    border-radius: 0.25em;
+    background-color: #fff; 
+  }
