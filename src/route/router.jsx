@@ -134,14 +134,7 @@ export const router = createBrowserRouter([
                 path: "/customers/list",
                 element: <CustomersList />
             },
-            {
-                path: "/users/list",
-                element: <UsersList />
-            },
-            {
-                path: "/rolespermission/create",
-                element: <AddRole/>
-            },
+           
             {
                 path: "/customers/view",
                 element: <CustomersView />
