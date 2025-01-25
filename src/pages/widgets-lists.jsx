@@ -23,7 +23,7 @@ import InvoiceOverview from '@/components/widgetsList/InvoiceOverview'
 import ProjectLeads from '@/components/widgetsList/ProjectLeads'
 import { upcomingEventsData } from '@/utils/fackData/upcomingEventsData'
 import Footer from '@/components/shared/Footer'
-import UsersList from '@/components/widgetsList/UsersList'
+// import UsersList from '@/components/widgetsList/UsersList'
 
 const WidgetsLists = () => {
     return (
@@ -37,7 +37,7 @@ const WidgetsLists = () => {
                     <Project title={"Project"} borderShow={true} cardYSpaceClass={"hrozintioal-card"} />
                     <Progress title={"Progress"} footerShow={true} />
                     <Meeting title={"Meeting"} />
-                    <UsersList title={"Users"} />
+                    {/* <UsersList title={"Users"} /> */}
                     <Todos title={"Todos"} />
                     <Trending title={"Trending"} />
                     <Accounts title={"Accounts"} />

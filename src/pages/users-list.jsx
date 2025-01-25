@@ -10,7 +10,7 @@ const UsersList = () => {
     
     return (
         <>
-            <PageHeader>
+            {/* <PageHeader>
                 <CustomersHeader />
             </PageHeader>
             <div className='main-content'>
@@ -18,7 +18,7 @@ const UsersList = () => {
                     <UserListComponent />
                 </div>
             </div>
-            <Footer />
+            <Footer /> */}
         </>
     )
 }
