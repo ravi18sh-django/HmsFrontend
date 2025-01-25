@@ -3,7 +3,7 @@ import axios from "axios";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const loginApi = async (credentials) => {
-    const response = await axios.post(`${BASE_URL}/admin/login`, credentials);
+    const response = await axios.post(`${BASE_URL}/api/admin/login`, credentials);
     console.log(response.data);
 
     return response.data;
