@@ -19,7 +19,7 @@ const SiteOverviewStatistics = () => {
                                         </div>
                                         <div>
                                             <div className="fs-4 fw-bold text-dark">
-                                                <span className="counter">{completed_number ? completed_number + "/" : ""}</span>
+                                                {/* <span className="counter">{completed_number}</span> */}
                                                 <span className="counter">{total_number}</span>
                                             </div>
                                             <h3 className="fs-13 fw-semibold text-truncate-1-line">{title}</h3>

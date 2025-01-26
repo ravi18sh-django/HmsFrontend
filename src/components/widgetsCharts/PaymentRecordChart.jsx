@@ -27,9 +27,9 @@ const InventorySalesChart = () => {
                 <div className="card-footer">
                     <div className="row g-4">
                         <Card bg_color={"bg-success"} title={"Sold"} price={"300"} progress={"75%"} />
-                        <Card bg_color={"bg-info"} title={"In Stock"} price={"500"} progress={"90%"} />
-                        <Card bg_color={"bg-danger"} title={"Out of Stock"} price={"50"} progress={"10%"} />
-                        <Card bg_color={"bg-primary"} title={"Total Revenue"} price={"$10,500"} progress={"50%"} />
+                        <Card bg_color={"bg-info"} title={"In Stock"} price={"800"} progress={"90%"} />
+                        <Card bg_color={"bg-danger"} title={"Out of Stock"} price={"200"} progress={"20%"} />
+                        <Card bg_color={"bg-primary"} title={"Total Revenue"} price={"₹10,500"} progress={"50%"} />
                     </div>
                 </div>
                 <CardLoader refreshKey={refreshKey} />

@@ -45,7 +45,7 @@ export const tasksOverviewChartOption = () => {
         tooltip: {
             y: {
                 formatter: function (e) {
-                    return +e + "Tasks"
+                    return +e + " Operations"
                 }
             },
             style: {

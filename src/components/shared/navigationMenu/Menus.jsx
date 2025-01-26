@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { mainMenuList } from "@/utils/mainMenuList";
 import { menuList } from "@/utils/fackData/menuList";
 import getIcon from "@/utils/getIcon";
+// import { BsPerson, BsHospital, BsPersonBadge, BsArchive } from 'react-icons/bs'; 
 
 const Menus = () => {
     const [openDropdown, setOpenDropdown] = useState(null);

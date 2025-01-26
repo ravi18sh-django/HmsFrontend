@@ -7,18 +7,21 @@ import {
     BsHospital, 
     BsPersonBadge, 
     BsArchive 
-} from 'react-icons/bs'; // This imports icons from Bootstrap Icons.
+} from 'react-icons/bs';
+import { GiHospital, GiMedicines } from "react-icons/gi";
+
+import { MdOutlineInventory2 } from "react-icons/md";
 
 const getIcon = (name) => {
     switch (name) {
         case "patients":
             return <BsPerson />;
         case "clinics":
-            return <BsHospital />;
+            return <GiHospital />;
         case "doctors":
             return <BsPersonBadge />;
         case "inventory":
-            return <BsArchive />;
+            return <GiMedicines />;
         case "feather-moon":
             return <FiMoon />
         case "feather-sunrise":

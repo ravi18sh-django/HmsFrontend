@@ -27,51 +27,63 @@ export const mainMenuList = [
       ],
     },
     {
-      id: 2,
-      name: "Hospital Inventory",
+      id: 2, // Updated to ensure uniqueness
+      name: "All Clinic's",
       path: "#",
-      icon: "feather-package", // Existing icon for inventory
-      dropdownMenu: [
-        {
-          id: 40, // Updated to ensure uniqueness
-          name: "List Hospitals",
-          path: "#",
-          subdropdownMenu: false,
-        },
-        {
-          id: 41, // Updated to ensure uniqueness
-          name: "Add Hospital",
-          path: "#",
-          subdropdownMenu: false,
-        },
-        {
-          id: 42, // Added for medicines
-          name: "Medicine",
-          path: "#",
-          icon: "feather-medical", // New icon for medicine
-          subdropdownMenu: false,
-        },
-      ],
-    },
-    {
-      id: 3, // Updated to ensure uniqueness
-      name: "Hospital Types",
-      path: "#",
-      icon: "feather-hospital", // Added hospital icon here
+      icon: "clinics", // Added hospital icon here
       dropdownMenu: [
         {
           id: 45, // Updated to ensure uniqueness
-          name: "Add Hospital Type",
+          name: "Add Clinic",
           path: "#",
           subdropdownMenu: false,
         },
         {
           id: 46, // Updated to ensure uniqueness
-          name: "View Hospital Types",
-          path: "/hospitaltypes",
+          name: "View Clinic's",
+          path: "#",
           subdropdownMenu: false,
         },
       ],
     },
+    {
+      id: 3,
+      name: "Clinic Inventory",
+      path: "#",
+      icon: "inventory", // Existing icon for inventory
+      dropdownMenu: [
+        {
+          id: 40, // Updated to ensure uniqueness
+          name: "Clinic1",
+          path: "#",
+          subdropdownMenu: false,
+        },
+        {
+          id: 41, // Updated to ensure uniqueness
+          name: "Clinic2",
+          path: "#",
+          subdropdownMenu: false,
+        },
+        {
+          id: 42, // Updated to ensure uniqueness
+          name: "Clinic3",
+          path: "#",
+          subdropdownMenu: false,
+        },
+        {
+          id: 43, // Updated to ensure uniqueness
+          name: "Clinic4",
+          path: "#",
+          subdropdownMenu: false,
+        },
+        {
+          id: 44, // Updated to ensure uniqueness
+          name: "Clinic5",
+          path: "#",
+          subdropdownMenu: false,
+        },
+      ],
+    }
+    
   ];
   
