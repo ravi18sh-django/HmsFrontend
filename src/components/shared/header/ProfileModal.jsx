@@ -30,15 +30,15 @@ const ProfileModal = () => {
     return (
         <div className="dropdown nxl-h-item">
             <a href="#" data-bs-toggle="dropdown" role="button" data-bs-auto-close="outside">
-                <img src="/images/avatar/1.png" alt="user-image" className="img-fluid user-avtar me-0" />
+                <img src="/images/avatar/dr.jpeg" alt="user-image" className="img-fluid user-avtar me-0" />
             </a>
             <div className="dropdown-menu dropdown-menu-end nxl-h-dropdown nxl-user-dropdown">
                 <div className="dropdown-header">
                     <div className="d-flex align-items-center">
-                        <img src="/images/avatar/1.png" alt="user-image" className="img-fluid user-avtar" />
+                        <img src="/images/avatar/dr.jpeg" alt="user-image" className="img-fluid user-avtar" />
                         <div>
-                            <h6 className="text-dark mb-0">{user_Info.name} <span className="badge bg-soft-success text-success ms-1">PRO</span></h6>
-                            <span className="fs-12 fw-medium text-muted">{user_Info.email}</span>
+                            <h6 className="text-dark mb-0">Dr. PRIYANKA AGARWAL<span className="badge bg-soft-success text-success ms-1">PRO</span></h6>
+                            <span className="fs-12 fw-medium text-muted">priyanka123@gmail.com</span>
                         </div>
                     </div>
                 </div>
