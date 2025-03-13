@@ -146,7 +146,7 @@ const CreatePatient = ({
     }
 
     try {
-      alert('test')
+      alert('Wait')
       const endpoint = editContent?._id
         ? `/api/patients/${editContent._id}`  // Update
         : "/api/patients";  // Create
