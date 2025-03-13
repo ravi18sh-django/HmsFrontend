@@ -1,65 +1,162 @@
-import axios from 'axios';
+import axios from "axios";
 
-const ErrorCodeMessages = {
-	401: 'Invalid credentials',
-	403: 'Access Forbidden',
-	404: 'Resource or page not found',
+const API_BASE_URL = import.meta.env.VITE_BASE_URL;
+
+const getAuthToken = () => {
+	const user = localStorage.getItem("HMSMern");
+	if (user) {
+		try {
+			return JSON.parse(user).token;
+		} catch (error) {
+			console.error("Error parsing token:", error);
+			return null;
+		}
+	}
+	return null;
 };
 
-function HttpClient() {
-	
-	const _errorHandler = (error) => {
-		return Promise.reject(
-			ErrorCodeMessages[error?.response?.status] ||
-			error?.response?.data?.message ||
-			error?.message ||
-			'An unknown error occurred'
-		);
-	};
+const apiClient = axios.create({
+	baseURL: API_BASE_URL,
+	headers: {
+		"Content-Type": "application/json",
+	},
+});
 
-	
-	const _httpClient = axios.create({
-		baseURL: import.meta.env.VITE_BASE_URL || 'http://localhost:3000', // Default base URL
-		timeout: 60000, // Timeout of 60 seconds
-		headers: {
-			'Content-Type': 'application/json',
-		},
-	});
+apiClient.interceptors.request.use((config) => {
+	const token = getAuthToken();
+	if (token) {
+		config.headers.Authorization = token;
+	}
+	return config;
+}, (error) => {
+	return Promise.reject(error);
+});
 
-	
-	_httpClient.interceptors.response.use(
-		(response) => response.data,
-		_errorHandler
-	);
+export const fetchData = async (endpoint) => {
+	try {
+		const response = await apiClient.get(endpoint);
+		return response.data;
+	} catch (error) {
+		console.error("Error fetching data:", error);
+		throw error;
+	}
+};
 
-	
-	const setAuthorizationHeader = () => {
-		const token =
-        JSON.parse(localStorage.getItem('HMSMern') || '{}').tokens;
-		
-		
-		
-		
-		if (token) {
-           // console.log(token);
-			_httpClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-		} else {
-			console.log("it came here");
-			
-			_httpClient.defaults.headers.common['Authorization'] =
-				import.meta.env.VITE_BASIC_AUTH || '';
+export const normalPostData = async (endpoint, data, isFormData = false) => {
+	try {
+	  const headers = isFormData
+		? { Authorization: `Bearer ${getAuthToken()}` } // No Content-Type for FormData
+		: { "Content-Type": "application/json", Authorization: `Bearer ${getAuthToken()}` };
+
+	  const response = await apiClient.post(endpoint, data, { headers });
+	  return response.data;
+	} catch (error) {
+	  console.error("Error posting data:", error.response?.data || error.message);
+	  throw error;
+	}
+  };
+export const normalPutData = async (endpoint, data, isFormData = false) => {
+	try {
+	  const headers = isFormData
+		? { Authorization: `Bearer ${getAuthToken()}` } // No Content-Type for FormData
+		: { "Content-Type": "application/json", Authorization: `Bearer ${getAuthToken()}` };
+
+	  const response = await apiClient.put(endpoint, data, { headers });
+	  return response.data;
+	} catch (error) {
+	  console.error("Error posting data:", error.response?.data || error.message);
+	  throw error;
+	}
+  };
+
+export const postData = async (endpoint, data, isFormData = false) => {
+	try {
+		console.log("📤 Sending data to API:", data);
+
+		// Debugging: Check FormData contents before sending
+		if (isFormData && data instanceof FormData) {
+			for (let pair of data.entries()) {
+				console.log(`FormData Key: ${pair[0]}`, "Value:", pair[1]);
+			}
 		}
-	};
 
-	
-	return {
-		get: (url, config = {}) => _httpClient.get(url, config),
-		post: (url, data, config = {}) => _httpClient.post(url, data, config),
-		patch: (url, data, config = {}) => _httpClient.patch(url, data, config),
-		put: (url, data, config = {}) => _httpClient.put(url, data, config),
-		delete: (url, config = {}) => _httpClient.delete(url, config),
-		setAuthorizationHeader,
-	};
-}
+		// Set headers manually for testing
+		const headers = isFormData
+			? {
+					"Content-Type": "multipart/form-data", // 🚨 Manually setting this
+					Authorization: getAuthToken(),
+			  }
+			: { "Content-Type": "application/json", Authorization: getAuthToken() };
 
-export default HttpClient();
+		// Debugging: Log headers before sending request
+		console.log("📝 Request Headers:", headers);
+
+		// Make API request
+		const response = await apiClient.post(endpoint, data, { headers });
+
+		console.log("✅ API Response:", response.data);
+		return response.data;
+	} catch (error) {
+		console.error("❌ Error posting data:", error.response?.data || error.message);
+		throw error;
+	}
+};
+export const putData = async (endpoint, data, isFormData = false) => {
+	try {
+		console.log("📤 Sending data to API:", data);
+
+		// Debugging: Check FormData contents before sending
+		if (isFormData && data instanceof FormData) {
+			for (let pair of data.entries()) {
+				console.log(`FormData Key: ${pair[0]}`, "Value:", pair[1]);
+			}
+		}
+
+		// Set headers manually for testing
+		const headers = isFormData
+			? {
+					"Content-Type": "multipart/form-data", // 🚨 Manually setting this
+					Authorization: getAuthToken(),
+			  }
+			: { "Content-Type": "application/json", Authorization: getAuthToken() };
+
+		// Debugging: Log headers before sending request
+		console.log("📝 Request Headers:", headers);
+
+		// Make API request
+		const response = await apiClient.put(endpoint, data, { headers });
+
+		console.log("✅ API Response:", response.data);
+		return response.data;
+	} catch (error) {
+		console.error("❌ Error posting data:", error.response?.data || error.message);
+		throw error;
+	}
+};
+
+
+
+
+
+
+
+
+export const updateData = async (endpoint, data) => {
+	try {
+		const response = await apiClient.put(endpoint, data);
+		return response.data;
+	} catch (error) {
+		console.error("Error updating data:", error);
+		throw error;
+	}
+};
+
+export const deleteData = async (endpoint) => {
+	try {
+		const response = await apiClient.delete(endpoint);
+		return response.data;
+	} catch (error) {
+		console.error("Error deleting data:", error);
+		throw error;
+	}
+};

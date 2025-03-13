@@ -30,3 +30,192 @@
     border-radius: 0.25em;
     background-color: #fff; 
   }
+
+  table {
+    width: 100%;
+  }
+
+  input {    
+    width: 49%;
+    margin-right: 10px !important;
+    margin-bottom: 10px !important;
+}
+.date_input{
+  width: 37%;
+}
+
+select {
+  width: 15%;
+  margin: 0px 12px 0px 0px !important;
+}
+
+form {
+  padding: 10px 10px;
+}
+
+/* bill css */
+
+
+
+.bill-form-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.bill-form label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.bill-form input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.service-input {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 10px 15px;
+  margin-top: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+@media print {
+  .bill-form-container {
+    border: none;
+    background: white;
+  }
+  button {
+    display: none;
+  }
+}
+/*anopther bill css*/
+
+
+.container {
+  text-align: center;
+  margin: 20px;
+}
+
+.bill {
+  width: 80%;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #000;
+  font-family: Arial, sans-serif;
+  background: #fff;
+}
+
+header h1 {
+  margin-bottom: 5px;
+}
+
+.patient-details,
+.hospital-details,
+.billing-summary {
+  text-align: left;
+  margin: 20px 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+table th, table td {
+  border: 1px solid #000;
+  padding: 10px;
+  text-align: left;
+}
+
+.print-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.mainbox{
+  border: 2px solid black;
+}
+.service{
+  border-bottom:2px solid black;
+}
+
+.jsb{
+  justify-content: space-between;
+}
+.text-left{
+  text-align: left;
+}
+p{
+color: black;
+}
+.relative{
+  position: relative;
+}
+.absoluute{
+  position: absolute;
+  top:50%;
+  left: 50%;
+  z-index: 1111;
+}
+.zind {
+  margin-bottom: 0px;
+}
+
+table th, table td {
+  border: 0px;
+  padding: 10px;
+  text-align: left;
+}
+/* .border-bottom{
+  border-bottom: 2px solid black !important ;
+} */
+
+/* @media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .bill, .bill * {
+    visibility: visible;
+  }
+
+  .bill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    box-shadow: none;
+    border: none;
+  }
+
+  .print-btn {
+    display: none;
+  }
+} */
+
+

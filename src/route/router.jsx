@@ -70,6 +70,18 @@ import WidgetsCharts from "../pages/widgets-charts";
 import WidgetsStatistics from "../pages/widgets-statistics";
 import WidgetsMiscellaneous from "../pages/widgets-miscellaneous";
 import ProtectedRoute from "./ProtectedRoute";
+import PatientsList from "../pages/PatientsList"
+import PatientCreate from "../pages/PatientCreate"
+import ClinicList from "../pages/ClinicList"
+import CreateClinic from '../pages/CreateClinic'
+import DoctorList from "../pages/DoctorList.jsx"
+import CreateDoctor from "../pages/CreateDoctor.jsx"
+import CategoryList from "../pages/CategoryList"
+import CreateCategory from "../pages/CreateCategory"
+import InventoryList from "../pages/InventoryList"
+import CreateInventory from "../pages/CreateInventory"
+import BillForm from "../pages/BillForm"
+import HospitalBill from "../pages/HospitalBill"
 
 
 export const router = createBrowserRouter([
@@ -98,6 +110,51 @@ export const router = createBrowserRouter([
                 path: "/reports/project",
                 element: <ReportsProject />
             },
+            {
+                path: "/patients",
+                element: <PatientsList/>
+            },
+            {
+                path: "/patientscreate",
+                element: <PatientCreate/>
+            },
+            {
+                path: "/Clinic",
+                element: <ClinicList/>
+            },
+            {
+                path: "/createclinic",
+                element: <CreateClinic/>
+            },
+            {
+                path: "/doctors",
+                element: <DoctorList/>
+            },
+            {
+                path: "/createdoctor",
+                element: <CreateDoctor/>
+            },
+            {
+                path: "/categorylist",
+                element: <CategoryList/>
+            },
+            {
+                path: "/inventorylist",
+                element: <InventoryList/>
+            },
+            {
+                path: "/createinventory",
+                element: <CreateInventory/>
+            },
+            {
+                path: "/create_category",
+                element: <CreateCategory/>
+            },
+            {
+                path: "/printbill",
+                element: <BillForm/>
+            },
+            
             {
                 path: "/reports/timesheets",
                 element: <ReportsTimesheets />

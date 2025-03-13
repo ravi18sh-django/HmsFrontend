@@ -11,6 +11,12 @@ import ProjectReportChart from '@/components/widgetsCharts/ProjectReportChart'
 import TimeSpentChart from '@/components/widgetsCharts/TimeSpentChart'
 import EventCalendarSmall from '@/components/EventCalendarSmall'
 
+
+
+
+
+
+
 const ReportsProject = () => {
   return (
     <>
