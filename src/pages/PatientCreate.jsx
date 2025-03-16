@@ -78,7 +78,7 @@ const CreatePatient = ({
 
   }, [editContent]);
 
-
+  console.log(editContent)
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -102,16 +102,18 @@ const CreatePatient = ({
     }));
   };
 
-  const removeDocument = async (index) => {
+  const removeDocument = async (documentId) => {
     try {
-      const response = await deleteData(`/api/patients/deleteimage/${index}`); // Add "const"
+      const response = await deleteData(`/api/patients/deleteimage/${documentId}`);
+  
       console.log(response);
   
-      if (response.isSuccess) { // Ensure checking the success flag properly
+      if (response.isSuccess) {
         alert("File Deleted Successfully");
+  
         setFormData((prev) => ({
           ...prev,
-          documents: prev.documents.filter((doc) => doc.fileId !== index),
+          documents: prev.documents.filter((doc) => doc._id !== documentId),
         }));
         
       } else {
@@ -123,14 +125,15 @@ const CreatePatient = ({
     }
   };
   
-  console.log(formData)
+
+  //console.log(formData)
   //console.log(editContent._id)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData)
     const formDataToSend = new FormData();
-    
+
     // Append fields except "documents"
     Object.keys(formData).forEach((key) => {
       if (key !== "documents") {
@@ -146,7 +149,7 @@ const CreatePatient = ({
     }
 
     try {
-      alert('Wait')
+      
       const endpoint = editContent?._id
         ? `/api/patients/${editContent._id}`  // Update
         : "/api/patients";  // Create
@@ -154,8 +157,8 @@ const CreatePatient = ({
       let response;
 
       if (editContent) {
-        
-        
+
+
 
         response = await putData(endpoint, formDataToSend, true);
       } else {
@@ -280,56 +283,57 @@ const CreatePatient = ({
           </div>
 
           {/* Age */}
-          <div className="col-md-12">
+          <div className="col-md-6">
             <label className="form-label">Age</label>
             <input type="number" name="age" placeholder="Enter Age" value={formData.age} onChange={handleChange} className="form-control" required />
           </div>
 
           {/* File Upload */}
-{/*           <div className="col-md-6">
+          {/* <div className="col-md-6">
             <label className="form-label">Upload Documents</label>
             <input type="file" multiple onChange={handleFileChange} className="form-control" />
           </div> */}
 
           {/* Staff Surgeons Multi-Select */}
-          <div className="col-md-12">
+          <div className="col-md-6">
             <label className="form-label">Staff Surgeons</label>
-            <Select isMulti options={doctors.map((doc) => ({ value: doc._id, label: doc.name }))} onChange={handleStaffSurgeonChange} className="form-control" placeholder="Select Staff Surgeons" />
+            <Select isMulti options={doctors.map((doc) => ({ value: doc._id, label: doc.name }))} onChange={handleStaffSurgeonChange} className="form-controls" placeholder="Select Staff Surgeons" />
           </div>
 
 
 
           {/* Display Uploaded Documents */}
-{/*           <div className="col-md-12">
+          {/* <div className="col-md-12">
             <label className="form-label">Uploaded Documents</label>
             <div className="container">
               <div className="row g-3">
                 {formData.documents.map((doc, index) => (
-                  doc.fileId ?
+                  doc.fileUrl ? (
                     <div key={index} className="col-6 col-md-4 col-lg-3 position-relative">
-                      <a href={`https://drive.google.com/uc?id=${doc.fileId}`} target="_blank" rel="noopener noreferrer">
-                        <img src={`https://drive.google.com/thumbnail?id=${doc.fileId}&sz=w1000`} alt={doc.fileName || "Document"} className="img-fluid border rounded"
-                          style={{ width: "100%", height: "auto", objectFit: "cover" }} />
+                      <a href={doc.fileUrl} target="_blank" rel="noopener noreferrer">
+                        <img
+                          src={doc.fileUrl}
+                          alt={`Document ${index + 1}`}
+                          className="img-fluid border rounded"
+                          style={{ width: "100%", height: "auto", objectFit: "cover" }}
+                        />
                       </a>
-                      
                       <div
-                        onClick={() => removeDocument(doc.fileId)}
+                        onClick={() => removeDocument(doc._id)}
                         className="position-absolute top-0 end-0 btn btn-sm btn-danger m-1"
-                        style={{ zIndex: 10 }}
+                        style={{ zIndex: 10, cursor: "pointer" }}
                       >
                         X
                       </div>
-
                     </div>
-                    :
-                    null
-
+                  ) : null
                 ))}
+
               </div>
             </div>
- */}
 
-          </div>
+
+          </div> */}
 
 
           <div className="col-12">
