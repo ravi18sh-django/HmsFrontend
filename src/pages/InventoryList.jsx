@@ -7,12 +7,14 @@ import CreateInventory from "./CreateInventory";
 function InventoryList() {
     const [inventory, setInventory] = useState([]);
     const [editContent, setEditContent] = useState(null);
+    const [loader, setLoader] = useState(true);
 
     const getInventory = async () => {
         try {
             const res = await fetchData("/api/inventory");
             if (res) {
                 setInventory(res);
+                setLoader(false)
             }
         } catch (error) {
             console.error("Error fetching inventory:", error);
@@ -28,10 +30,12 @@ function InventoryList() {
     }, [editContent]);
 
     const deleteItem = async (id) => {
+        setLoader(true)
         try {
             const res = await deleteData(`/api/inventory/${id}`);
             if (res) {
                 setInventory((prevInventory) => prevInventory.filter(item => item._id !== id));
+                setLoader(false)
             }
         } catch (error) {
             console.error("Error deleting inventory item:", error);
@@ -89,6 +93,17 @@ function InventoryList() {
         ],
         []
     );
+    if (loader) {
+            return (
+                <div class="d-flex justify-content-center">
+                    <div class="spinner-border text-warning" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+    
+            )
+        }
+        
 
     const table = useReactTable({
         data: inventory,

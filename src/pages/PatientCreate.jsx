@@ -10,7 +10,7 @@ const CreatePatient = ({
   setEditContent
 }) => {
   const navigate = useNavigate();
-
+  const [loader, setLoader] = useState(false);
   const [doctors, setDoctors] = useState([]);
   const [clinics, setClinics] = useState([]);
   const [formData, setFormData] = useState({
@@ -106,7 +106,7 @@ const CreatePatient = ({
     try {
       const response = await deleteData(`/api/patients/deleteimage/${documentId}`);
   
-      console.log(response);
+      //console.log(response);
   
       if (response.isSuccess) {
         alert("File Deleted Successfully");
@@ -130,6 +130,7 @@ const CreatePatient = ({
   //console.log(editContent._id)
 
   const handleSubmit = async (e) => {
+    setLoader(true)
     e.preventDefault();
     console.log(formData)
     const formDataToSend = new FormData();
@@ -168,6 +169,7 @@ const CreatePatient = ({
 
 
       if (response.isSuccess) {
+        setLoader(false)
         navigate("/patients");
         setEditContent(null)
       } else {
@@ -178,6 +180,17 @@ const CreatePatient = ({
     }
 
   };
+  if (loader) {
+          return (
+              <div class="d-flex justify-content-center">
+                  <div class="spinner-border text-warning" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                  </div>
+              </div>
+  
+          )
+      }
+      //const [loader, setLoader] = useState(false);
 
   return (
     <div className="max-w-2xl mx-auto  p-6 bg-white shadow-lg rounded-lg">

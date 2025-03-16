@@ -6,14 +6,15 @@ import CreatePatient from "./PatientCreate";
 
 function PatientsList() {
     const [patients, setPatients] = useState([]);
-    const [editContent, setEditContent] = useState(null); // Fix: Initialize as null
-    
+    const [editContent, setEditContent] = useState(null);
+    const [loader, setLoader] = useState(true);
 
     const getPatients = async () => {
         try {
             const res = await fetchData("/api/patients");
             if (res.isSuccess) {
                 setPatients(res.data);
+                setLoader(false);
             }
         } catch (error) {
             console.error("Error fetching patients:", error);
@@ -31,10 +32,12 @@ function PatientsList() {
 
 
     const deletePatient = async (id) => {
+        setLoader(true)
         try {
             const res = await deleteData(`/api/patients/${id}`);
             if (res.isSuccess) {
                 setPatients((prevPatients) => prevPatients.filter(patient => patient._id !== id));
+                setLoader(false)
             }
         } catch (error) {
             console.error("Error deleting patient:", error);
@@ -68,15 +71,15 @@ function PatientsList() {
             { header: "Gender", accessorKey: "gender" },
             { header: "Contact", accessorKey: "contact" },
             { header: "Diagnosis", accessorKey: "diagnosis" },
-            { 
-                header: "Doctor", 
-                accessorKey: "doctor", 
-                cell: ({ row }) => row.original.doctor?.name || "N/A" 
+            {
+                header: "Doctor",
+                accessorKey: "doctor",
+                cell: ({ row }) => row.original.doctor?.name || "N/A"
             },
-            { 
-                header: "Clinic", 
-                accessorKey: "clinic", 
-                cell: ({ row }) => row.original.clinic?.name || "N/A" 
+            {
+                header: "Clinic",
+                accessorKey: "clinic",
+                cell: ({ row }) => row.original.clinic?.name || "N/A"
             },
         ],
         []
@@ -90,12 +93,23 @@ function PatientsList() {
         initialState: { pagination: { pageSize: 10 } },
     });
 
+    if (loader) {
+        return (
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border text-warning" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+
+        )
+    }
+
     return (
         <div className="p-4 w-full">
             {editContent ? (
-                <CreatePatient 
-                editContent={editContent}
-                setEditContent={setEditContent} />
+                <CreatePatient
+                    editContent={editContent}
+                    setEditContent={setEditContent} />
             ) : (
                 <>
                     <h2 className="text-2xl font-bold mb-4">Patients List</h2>

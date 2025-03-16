@@ -7,6 +7,7 @@ import CreateDoctor from "./CreateDoctor";
 function ClinicList() {
     const [patients, setPatients] = useState([]);
     const [editContent, setEditContent] = useState(null); 
+    const [loader, setLoader] = useState(true);
     
 
     const getPatients = async () => {
@@ -14,6 +15,7 @@ function ClinicList() {
             const res = await fetchData("/api/doctors");
             if (res) {
                 setPatients(res);
+                setLoader(false)
             }
         } catch (error) {
             console.error("Error fetching patients:", error);
@@ -30,15 +32,29 @@ function ClinicList() {
     
 
     const deletePatient = async (id) => {
+        setLoader(true)
         try {
             const res = await deleteData(`/api/doctors/${id}`);
             if (res) {
                 setPatients((prevPatients) => prevPatients.filter(patient => patient._id !== id));
+                setLoader(false)
             }
         } catch (error) {
             console.error("Error deleting patient:", error);
         }
     };
+
+     if (loader) {
+                    return (
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border text-warning" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+            
+                    )
+                }
+                
 
     const columns = useMemo(
         () => [
