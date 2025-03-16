@@ -10,6 +10,7 @@ const LoginForm = ({ registerPath, resetPath }) => {
 
     const [email, setEmail] = useState("")
     const [pass, setPass] = useState("")
+    const [loader, setLoader] = useState(false);
 
     
     const { isLoading, error, user } = useSelector((state) => state.auth);
@@ -24,6 +25,7 @@ const LoginForm = ({ registerPath, resetPath }) => {
 
 
     const handleLogin = (e) => {
+        setLoader(true)
         e.preventDefault();
         const credentials = { email, password: pass };
         dispatch(loginRequest(credentials));
@@ -38,7 +40,16 @@ const LoginForm = ({ registerPath, resetPath }) => {
     }, [user, navigate]);
     
 
+    if (loader) {
+        return (
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border text-warning" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
 
+        )
+    }
 
     return (
         <>
