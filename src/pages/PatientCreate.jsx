@@ -280,16 +280,16 @@ const CreatePatient = ({
           </div>
 
           {/* Age */}
-          <div className="col-md-6">
+          <div className="col-md-12">
             <label className="form-label">Age</label>
             <input type="number" name="age" placeholder="Enter Age" value={formData.age} onChange={handleChange} className="form-control" required />
           </div>
 
           {/* File Upload */}
-          <div className="col-md-6">
+{/*           <div className="col-md-6">
             <label className="form-label">Upload Documents</label>
             <input type="file" multiple onChange={handleFileChange} className="form-control" />
-          </div>
+          </div> */}
 
           {/* Staff Surgeons Multi-Select */}
           <div className="col-md-12">
@@ -300,7 +300,7 @@ const CreatePatient = ({
 
 
           {/* Display Uploaded Documents */}
-          <div className="col-md-12">
+{/*           <div className="col-md-12">
             <label className="form-label">Uploaded Documents</label>
             <div className="container">
               <div className="row g-3">
@@ -311,10 +311,7 @@ const CreatePatient = ({
                         <img src={`https://drive.google.com/thumbnail?id=${doc.fileId}&sz=w1000`} alt={doc.fileName || "Document"} className="img-fluid border rounded"
                           style={{ width: "100%", height: "auto", objectFit: "cover" }} />
                       </a>
-                      {/* <button onClick={() => removeDocument(doc.fileId)} className="position-absolute top-0 end-0 btn btn-sm btn-danger m-1"
-                        style={{ zIndex: 10 }}>
-                        X
-                      </button> */}
+                      
                       <div
                         onClick={() => removeDocument(doc.fileId)}
                         className="position-absolute top-0 end-0 btn btn-sm btn-danger m-1"
@@ -330,7 +327,7 @@ const CreatePatient = ({
                 ))}
               </div>
             </div>
-
+ */}
 
           </div>
 
