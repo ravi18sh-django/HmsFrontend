@@ -8,8 +8,8 @@ import { loginRequest } from "../../redux/auth/authSlice";
 
 const LoginForm = ({ registerPath, resetPath }) => {
 
-    const [email, setEmail] = useState("ravi18sh@gmail.com")
-    const [pass, setPass] = useState("A@!3675u9")
+    const [email, setEmail] = useState("")
+    const [pass, setPass] = useState("")
 
     
     const { isLoading, error, user } = useSelector((state) => state.auth);
