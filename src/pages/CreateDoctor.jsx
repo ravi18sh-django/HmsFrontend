@@ -11,7 +11,7 @@ const CreateDoctor = ({ editDoctor, setEditContent }) => {
         specialization: editDoctor?.specialization || "",
         contact: editDoctor?.contact || "",
         email: editDoctor?.email || "",
-        address: editDoctor?.email || "",
+        address: editDoctor?.address || "",
         clinic: editDoctor?.clinic._id || "", // Stores clinic ID
     });
 
