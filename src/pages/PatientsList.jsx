@@ -21,6 +21,12 @@ function PatientsList() {
         }
     };
 
+
+    if(patients){
+        localStorage.setItem("HMSMernPatient", JSON.stringify(patients.length));
+    }
+    
+
     useEffect(() => {
         getPatients();
     }, []);

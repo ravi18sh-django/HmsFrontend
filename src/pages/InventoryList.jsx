@@ -8,6 +8,10 @@ import React, { useState, useEffect, useMemo } from "react";
      const [inventory, setInventory] = useState([]);
      const [editContent, setEditContent] = useState(null);
  
+
+     if(inventory){
+        localStorage.setItem("HMSMernInventory", JSON.stringify(inventory.length));
+    }
      const getInventory = async () => {
          try {
              const res = await fetchData("/api/inventory");

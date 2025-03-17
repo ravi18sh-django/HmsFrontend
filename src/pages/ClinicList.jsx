@@ -19,6 +19,10 @@ import React, { useState, useEffect, useMemo } from "react";
              console.error("Error fetching patients:", error);
          }
      };
+
+     if(patients){
+        localStorage.setItem("HMSMernClinic", JSON.stringify(patients.length));
+    }
  
      useEffect(() => {
          getPatients();

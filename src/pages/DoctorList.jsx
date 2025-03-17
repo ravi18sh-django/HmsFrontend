@@ -7,7 +7,9 @@ import React, { useState, useEffect, useMemo } from "react";
  function ClinicList() {
      const [patients, setPatients] = useState([]);
      const [editContent, setEditContent] = useState(null); 
-     
+     if(patients){
+        localStorage.setItem("HMSMernDoctor", JSON.stringify(patients.length));
+    }
  
      const getPatients = async () => {
          try {
