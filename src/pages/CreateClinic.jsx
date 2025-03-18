@@ -5,7 +5,7 @@ import { normalPostData, normalPutData } from "../api/HttpClient"// Adjust impor
 const CreateClinic = ({ editClinic, setEditContent }) => {
     const navigate = useNavigate();
 
-    console.log(editClinic)
+    
 
     // Set initial state from editClinic if provided, otherwise empty form
     const [clinicData, setClinicData] = useState({
@@ -31,9 +31,12 @@ const CreateClinic = ({ editClinic, setEditContent }) => {
                 : await normalPostData(endpoint, clinicData, true); // POST request for creation
 
             if (response) {
-                console.log("aya kya")
-                setEditContent(null)
-                navigate("/Clinic"); // Redirect after successful submission
+                if(editClinic){
+                    setEditContent(null);
+                }
+                 
+                navigate("/Clinic");
+                
             } else {
                 console.error("Failed to submit clinic data:", response.message);
             }
