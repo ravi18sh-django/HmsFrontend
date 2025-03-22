@@ -11,17 +11,11 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        loginRequest(state) {
-            console.log('aya kuch')
-            
+        loginRequest(state) {            
             state.isLoading = true;
             state.error = null;
         },
         loginSuccess(state, action) {
-            console.log('success login');
-            console.log(action.payload);
-            
-            
             state.isLoading = false;
             state.user = action.payload;
             localStorage.setItem("HMSMern", JSON.stringify(state.user));

@@ -102,7 +102,7 @@ import React, { useState, useEffect, useMemo } from "react";
                  setEditContent={setEditContent} />
              ) : (
                  <>
-                     <h2 className="text-2xl font-bold mb-4">Doctors List</h2>
+                     <h2 className="text-2xl font-bold mb-4">Staff List</h2>
                      <div className="overflow-x-auto w-full">
                          <table className="w-full border-collapse border border-gray-300">
                              <thead>

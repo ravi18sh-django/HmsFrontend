@@ -18,9 +18,7 @@ const LoginForm = ({ registerPath, resetPath }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     
-    console.log(user);
-
-    console.log(error);
+    
     
 
 
@@ -32,7 +30,7 @@ const LoginForm = ({ registerPath, resetPath }) => {
     };
 
     useEffect(() => {
-        console.log('came herer');
+    
         
         if (user) {
             navigate('/'); 
@@ -81,7 +79,7 @@ const LoginForm = ({ registerPath, resetPath }) => {
                     <button type="submit" className="btn btn-lg btn-primary w-100">Login</button>
                 </div>
             </form>
-            <div className="w-100 mt-5 text-center mx-auto">
+            {/* <div className="w-100 mt-5 text-center mx-auto">
                 <div className="mb-4 border-bottom position-relative"><span className="small py-1 px-3 text-uppercase text-muted bg-white position-absolute translate-middle">or</span></div>
                 <div className="d-flex align-items-center justify-content-center gap-2">
                     <a href="#" className="btn btn-light-brand flex-fill" data-bs-toggle="tooltip" data-bs-trigger="hover" title="Login with Facebook">
@@ -98,7 +96,7 @@ const LoginForm = ({ registerPath, resetPath }) => {
             <div className="mt-5 text-muted">
                 <span> Don't have an account?</span>
                 <Link to={registerPath} className="fw-bold"> Create an Account</Link>
-            </div>
+            </div> */}
         </>
     )
 }

@@ -14,17 +14,18 @@ const ProfileModal = () => {
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        dispatch(logout());  
+        dispatch(logout());
         navigate('/authentication/login/cover');
     };
 
-    const user_Info = JSON.parse(localStorage.getItem("HMSMern")).admin;
-
-    if(!user_Info){
-        <Navigate to="/authentication/login/cover" replace />
+    const user_Info = JSON.parse(localStorage.getItem("HMSMern"))?.admin || null;
+    console.log(user_Info)
+    if (!user_Info) {
+        return <Navigate to="/authentication/login/cover" replace />;
     }
-    
-    
+
+
+
 
 
     return (
@@ -122,7 +123,7 @@ const ProfileModal = () => {
                     <i> <FiLogOut /></i>
                     <span>Logout</span>
                 </a>
-                
+
             </div>
         </div>
     )

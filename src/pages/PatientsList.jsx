@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { fetchData, deleteData } from "../api/HttpClient";
 import { useReactTable, getCoreRowModel, getPaginationRowModel, flexRender } from "@tanstack/react-table";
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { FaEdit, FaTrash, FaBullseye } from "react-icons/fa";
 import CreatePatient from "./PatientCreate";
+import PatientDetails from "./PatientDetails";
 
 function PatientsList() {
     const [patients, setPatients] = useState([]);
     const [editContent, setEditContent] = useState(null);
+    const [viewContent, setViewContent] = useState(null);
     const [loader, setLoader] = useState(true);
 
     const getPatients = async () => {
@@ -23,6 +25,7 @@ function PatientsList() {
 
 
     if(patients){
+        console.log(patients)
         localStorage.setItem("HMSMernPatient", JSON.stringify(patients.length));
     }
     
@@ -76,6 +79,17 @@ function PatientsList() {
             { header: "Age", accessorKey: "age" },
             { header: "Gender", accessorKey: "gender" },
             { header: "Contact", accessorKey: "contact" },
+            {
+                header: "Admission Date",
+                accessorKey: "dateOfAdmission",
+                cell: ({ getValue }) => new Date(getValue()).toLocaleDateString("en-IN"), 
+              },
+            {
+                header: "Discharge Date",
+                accessorKey: "dateOfDischarge",
+                cell: ({ getValue }) => new Date(getValue()).toLocaleDateString("en-IN"), 
+              },
+              
             { header: "Diagnosis", accessorKey: "diagnosis" },
             {
                 header: "Doctor",
@@ -87,6 +101,17 @@ function PatientsList() {
                 accessorKey: "clinic",
                 cell: ({ row }) => row.original.clinic?.name || "N/A"
             },
+            {
+                header: "View",
+                accessorKey: "view",
+                cell: ({ row }) => (
+                <button
+                            onClick={() => setViewContent(row.original)}
+                            className="text-blue-500 hover:text-blue-700"
+                        >
+                            <FaBullseye />
+                        </button>)
+            }
         ],
         []
     );
@@ -110,12 +135,84 @@ function PatientsList() {
         )
     }
 
+    // return (
+    //     <div className="p-4 w-full">
+    //         {editContent ? (
+    //             <CreatePatient
+    //                 editContent={editContent}
+    //                 setEditContent={setEditContent} />
+    //         ) : (
+    //             <>
+    //                 <h2 className="text-2xl font-bold mb-4">Patients List</h2>
+    //                 <div className="overflow-x-auto w-full">
+    //                     <table className="w-full border-collapse border border-gray-300">
+    //                         <thead>
+    //                             {table.getHeaderGroups().map((headerGroup) => (
+    //                                 <tr key={headerGroup.id} className="bg-gray-200 text-left">
+    //                                     {headerGroup.headers.map((header) => (
+    //                                         <th key={header.id} className="border p-3">
+    //                                             {flexRender(header.column.columnDef.header, header.getContext())}
+    //                                         </th>
+    //                                     ))}
+    //                                 </tr>
+    //                             ))}
+    //                         </thead>
+    //                         <tbody>
+    //                             {table.getRowModel().rows.map((row) => (
+    //                                 <tr key={row.id} className="border hover:bg-gray-100">
+    //                                     {row.getVisibleCells().map((cell) => (
+    //                                         <td key={cell.id} className="border p-3">
+    //                                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
+    //                                         </td>
+    //                                     ))}
+    //                                 </tr>
+    //                             ))}
+    //                         </tbody>
+    //                     </table>
+    //                 </div>
+
+    //                 {/* Pagination Controls */}
+    //                 <div className="flex justify-between items-center mt-4">
+    //                     <button
+    //                         className="px-4 py-2 bg-gray-300 bttn rounded disabled:opacity-50"
+    //                         onClick={() => table.previousPage()}
+    //                         disabled={!table.getCanPreviousPage()}
+    //                     >
+    //                         Prev
+    //                     </button>
+    //                     <span className="text-lg mx-2">
+    //                         Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
+    //                     </span>
+    //                     <button
+    //                         className="px-4 py-2 bg-gray-300 bttn rounded disabled:opacity-50"
+    //                         onClick={() => table.nextPage()}
+    //                         disabled={!table.getCanNextPage()}
+    //                     >
+    //                         Next
+    //                     </button>
+    //                 </div>
+    //             </>
+    //         )}
+    //     </div>
+    // );
+
     return (
         <div className="p-4 w-full">
             {editContent ? (
                 <CreatePatient
                     editContent={editContent}
-                    setEditContent={setEditContent} />
+                    setEditContent={setEditContent}
+                />
+            ) : viewContent ? (
+                <div>
+                    {/* <button
+                        onClick={() => setViewContent(null)}
+                        className="mb-4 px-4 py-2 bg-gray-300 rounded"
+                    >
+                        Back
+                    </button> */}
+                    <PatientDetails data={viewContent} setData={setViewContent} />
+                </div>
             ) : (
                 <>
                     <h2 className="text-2xl font-bold mb-4">Patients List</h2>
@@ -145,11 +242,11 @@ function PatientsList() {
                             </tbody>
                         </table>
                     </div>
-
+    
                     {/* Pagination Controls */}
                     <div className="flex justify-between items-center mt-4">
                         <button
-                            className="px-4 py-2 bg-gray-300 bttn rounded disabled:opacity-50"
+                            className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
                             onClick={() => table.previousPage()}
                             disabled={!table.getCanPreviousPage()}
                         >
@@ -159,7 +256,7 @@ function PatientsList() {
                             Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
                         </span>
                         <button
-                            className="px-4 py-2 bg-gray-300 bttn rounded disabled:opacity-50"
+                            className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
                             onClick={() => table.nextPage()}
                             disabled={!table.getCanNextPage()}
                         >
@@ -170,6 +267,7 @@ function PatientsList() {
             )}
         </div>
     );
+    
 }
 
 export default PatientsList;

@@ -26,7 +26,7 @@ const BillForm = () => {
     serviceAmount: "",
     toPay: "",
     depositReceiptNo: "",
-    discountAmt: "",
+    discountAmt: "0",
     netAmount: "",
     totalPaid: "",
     paymentDetails: ""
@@ -36,6 +36,12 @@ const BillForm = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  if (formData.toPay && formData.discountAmt && formData.depositReceiptNo) {
+    const getamt = formData.toPay - formData.discountAmt - formData.depositReceiptNo;
+    formData.netAmount = getamt;
+  }
+  
 
   const handleServiceChange = (index, e) => {
     const newServices = [...formData.services];
@@ -86,9 +92,9 @@ const BillForm = () => {
           <h3>Billing Summary</h3>
           <label>Service Amount: <input type="number" name="serviceAmount" value={formData.serviceAmount} onChange={handleChange} /></label>
           <label>To Pay: <input type="number" name="toPay" value={formData.toPay} onChange={handleChange} /></label>
-          <label>Deposit Receipt No: <input type="text" name="depositReceiptNo" value={formData.depositReceiptNo} onChange={handleChange} /></label>
-          <label>Discount Amt.: <input type="number" name="discountAmt" value={formData.discountAmt} onChange={handleChange} /></label>
-          <label>Net Amount: <input type="number" name="netAmount" value={formData.netAmount} onChange={handleChange} /></label>
+          <label>Deposit Receipt Amt: <input type="text" name="depositReceiptNo" value={formData.depositReceiptNo} onChange={handleChange} /></label>
+          <label>Discount Amt.: <input  type="number" name="discountAmt" value={formData.discountAmt} onChange={handleChange} /></label>
+          <label>Net Amount: <input disabled type="number" name="netAmount" value={formData.netAmount} onChange={handleChange} /></label>
           <label>Total Paid: <input type="number" name="totalPaid" value={formData.totalPaid} onChange={handleChange} /></label>
           <label>Payment Details: <input type="text" name="paymentDetails" value={formData.paymentDetails} onChange={handleChange} /></label>
           <button type="button" onClick={printBill}>Print Bill</button>
