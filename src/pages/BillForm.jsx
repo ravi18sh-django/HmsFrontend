@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import HospitalBill from "./HospitalBill";
+import {FiTrash } from 'react-icons/fi'
 
 const BillForm = () => {
   const [formData, setFormData] = useState({
@@ -52,7 +53,11 @@ const BillForm = () => {
   const addService = () => {
     setFormData({ ...formData, services: [...formData.services, { name: "", amount: "" }] });
   };
-
+  const remService = (e, name) => {
+    e.preventDefault();
+    setFormData({ ...formData, services: formData.services.filter((item)=>item.name!==name) });
+  };
+console.log("formData is ",formData)
   const printBill = () => {
     setPopUp(false);
   };
@@ -84,8 +89,9 @@ const BillForm = () => {
           <h3>Services</h3>
           {formData.services.map((service, index) => (
             <div key={index} className="service-input">
-              <input type="text" name="name" placeholder="Service Name" value={service.name} onChange={(e) => handleServiceChange(index, e)} />
+              <input type="text" name="name" placeholder="Service Name" value={service.name} onChange={(e) => handleServiceChange(index, e)} /> 
               <input type="number" name="amount" placeholder="Amount" value={service.amount} onChange={(e) => handleServiceChange(index, e)} />
+              {formData.services.length>1 && <button onClick={(e)=>remService(e,service.name)} ><FiTrash size={13} /></button>}
             </div>
           ))}
           <button type="button" onClick={addService}>Add Service</button>
