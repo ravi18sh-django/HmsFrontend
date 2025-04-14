@@ -19,7 +19,7 @@ const ProfileModal = () => {
     };
 
     const user_Info = JSON.parse(localStorage.getItem("HMSMern"))?.admin || null;
-    console.log(user_Info)
+    // console.log("yo sai",user_Info)
     if (!user_Info) {
         return <Navigate to="/authentication/login/cover" replace />;
     }

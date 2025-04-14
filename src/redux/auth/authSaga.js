@@ -6,10 +6,15 @@ function* handleLogin(action) {
     try {
         //console.log('action ', action);
         
-        const data = yield call(loginApi, action.payload);
-        yield put(loginSuccess(data));
+        const data = yield call(loginApi, action.payload);        
+        if(data.message==='Login successful'){
+            yield put(loginSuccess(data));
+        }else{
+            yield put(loginFailure(data?.message || "Login failed"));
+        }
+        
     } catch (error) {
-        // console.log(error.response?.data?.message);        
+                 
         yield put(loginFailure(error.response?.data?.message || "Login failed"));
     }
 }

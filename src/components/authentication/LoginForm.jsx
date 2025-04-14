@@ -10,35 +10,35 @@ const LoginForm = ({ registerPath, resetPath }) => {
 
     const [email, setEmail] = useState("")
     const [pass, setPass] = useState("")
-    const [loader, setLoader] = useState(false);
-
     
+
+
     const { isLoading, error, user } = useSelector((state) => state.auth);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    
-    
-    
+
+
+
 
 
     const handleLogin = (e) => {
-        setLoader(true)
+        
         e.preventDefault();
         const credentials = { email, password: pass };
         dispatch(loginRequest(credentials));
     };
 
     useEffect(() => {
-    
-        
+
+
         if (user) {
-            navigate('/'); 
+            navigate('/');
         }
     }, [user, navigate]);
-    
 
-    if (loader) {
+
+    if (isLoading) {
         return (
             <div class="d-flex justify-content-center">
                 <div class="spinner-border text-warning" role="status">
@@ -72,9 +72,10 @@ const LoginForm = ({ registerPath, resetPath }) => {
                         <Link to={resetPath} className="fs-11 text-primary">Forget password?</Link>
                     </div>
                 </div>
-                <div className="m-3 text-center danger">
-                    <p>{error}</p>
+                <div className="m-3 text-center">
+                    <p style={{ color: 'red',fontWeight:"Bolder" }}>{error}</p>
                 </div>
+
                 <div className="m-3">
                     <button type="submit" className="btn btn-lg btn-primary w-100">Login</button>
                 </div>
